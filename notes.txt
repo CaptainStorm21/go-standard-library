@@ -6,4 +6,4 @@ On Windows, though, this will not work unless you have customized your IDE or te
 
 go run .
 
-run  go run cmd/web/*.go
+run  go run cmd/web/..go
