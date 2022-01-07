@@ -1,3 +1,2 @@
-module github.com/captainstorm21/go-web-app
-
+module github.com/captainstorm21/web-app/
 go 1.17

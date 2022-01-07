@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"net/http",
-	"github.com/captainstorm21/"
+	"net/http"
+	"github.com/captainstorm21/web-app/pkg/render"
 )
 
 // Home is the about page handlers
