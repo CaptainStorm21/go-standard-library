@@ -1,5 +1,9 @@
 {
     "go.inferGopath": false,
     "editor.formatOnType": true,
-    "editor.fontSize": 22
+    "editor.fontSize": 22,
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.useCodeSnippetsOnFunctionSuggestWithoutType": true,
+    "workbench.settings.openDefaultKeybindings": true,
+    "go.goroot": "/snap/go/current"
 }

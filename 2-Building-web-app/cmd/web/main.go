@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/CaptainStorm21/go-standard-library/tree/2-building-web-app/2-Building-web-app/pkg/handlers"
 	"fmt"
-	"github.com/captainstorm21/web-app/pkg/handlers"
 	"net/http"
 )
 
