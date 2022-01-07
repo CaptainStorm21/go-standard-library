@@ -1,15 +1,16 @@
-package main
+package handlers
 
 import (
-	"net/http"
+	"net/http",
+	"github.com/captainstorm21/"
 )
 
 // Home is the about page handlers
 func Home(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "home.page.html")
+	render.RenderPackage(w, "home.page.html")
 }
 
 // About is the about page handlers
 func About(w http.ResponseWriter, r *http.Request) {
-	renderTemplate(w, "about.page.html")
+	render.RenderTemplate(w, "about.page.html")
 }
