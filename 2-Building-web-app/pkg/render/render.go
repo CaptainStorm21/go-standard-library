@@ -27,7 +27,7 @@ func RenderTemplate(w http.ResponseWriter, html string) {
 	
 	_, err = buf.WriteTo(w)
 	if err != nil {
-		fmt.Println("error writing template", err)
+		fmt.Println("this error occured ", err)
 	}
 }
 
