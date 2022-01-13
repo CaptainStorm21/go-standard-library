@@ -7,25 +7,37 @@ import (
 	"log"
 	"net/http"
 	"path/filepath"
+
+	"github.com/captainstorm21/go-web-app/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
-func RenderTemplate(w http.ResponseWriter, html string) {
-	tc, err := CreateTemplateCache()
-	if err != nil {
-		log.Fatal(err)
-	}
+var app *config.AppConfig
 
-	t, ok := tc[html]
+// NewTemplates sets the config for the new package
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
+
+func RenderTemplate(w http.ResponseWriter, tmpl string) {
+
+	var tc map[string]*template.Template
+
+	if app.UseCache {
+		tc = app.TemplateCache
+	} else {
+		tc, _ = CreateTemplateCache()
+	}
+	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(err)
+		log.Fatal("Could not get a template from template cache")
 	}
 
-	buf := new (bytes.Buffer)
+	buf := new(bytes.Buffer)
 	_ = t.Execute(buf, nil)
-	
-	_, err = buf.WriteTo(w)
+
+	_, err := buf.WriteTo(w)
 	if err != nil {
 		fmt.Println("this error occured ", err)
 	}
@@ -35,20 +47,20 @@ func RenderTemplate(w http.ResponseWriter, html string) {
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	myCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob("./templates/*page.html")
+	pages, err := filepath.Glob("./templates/*.page.html")
 	if err != nil {
 		return myCache, err
 	}
 
 	for _, page := range pages {
 		name := filepath.Base(page)
-		// fmt.Println("rendering ", page)
+		fmt.Println("rendering ", page)
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
 		if err != nil {
 			return myCache, err
 		}
 
-		matches, err := filepath.Glob("./*.layout.html")
+		matches, err := filepath.Glob("./templates/*.layout.html")
 		if err != nil {
 			return myCache, err
 		}
