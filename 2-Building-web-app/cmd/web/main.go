@@ -2,12 +2,14 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"log"
+	"net/http"
+
 	"github.com/captainstorm21/go-web-app/pkg/config"
 	"github.com/captainstorm21/go-web-app/pkg/handlers"
 	"github.com/captainstorm21/go-web-app/pkg/render"
 )
+
 const portNumber = ":8080"
 
 // main is the main function
@@ -22,16 +24,22 @@ func main() {
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	repo  := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
-
-
 
 	render.NewTemplates(&app)
 
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
+	// http.HandleFunc("/", handlers.Repo.Home)
+	// http.HandleFunc("/about", handlers.Repo.About)
 
 	fmt.Println(fmt.Sprintf("Staring application on port %s", portNumber))
-	_ = http.ListenAndServe(portNumber, nil)
+	// _ = http.ListenAndServe(portNumber, nil)
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+
+	err = srv.ListenAndServe()
+	log.Fatal(err)
 }
