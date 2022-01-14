@@ -1,12 +1,16 @@
 {{template "base" .}}
 
 {{define "content"}}
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <h1>This is the about page</h1>
                 <p>This is some text</p>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem fuga ad labore illo necessitatibus nesciunt asperiores, nobis obcaecati soluta dolorem natus sapiente quia nemo cum doloribus eos quis amet voluptate!</p>
+            </div>
+
+            <div class="col-12">
+                <p> This came from the template {{index .StringMap "test"}}</p>
             </div>
         </div>
     </div>
