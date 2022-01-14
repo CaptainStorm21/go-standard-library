@@ -12,6 +12,14 @@
             <div class="col-12">
                 <p> This came from the template {{index .StringMap "test"}}</p>
             </div>
+
+            <div>
+                {{if ne (index .StringMap "remote_ip") ""}}
+                    Your IP address is {{index .StringMap "remote_ip"}}
+                {{else}}
+                    No bloody clue your IP 
+                {{end}}
+            </div>
         </div>
     </div>
 {{end}}
